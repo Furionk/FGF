@@ -1,5 +1,7 @@
 # Furion Game Framework (based on Entita)
-Furion Game Framework
+
+Please work with entitas 3.6.1
+https://github.com/sschmid/Entitas-CSharp
 
 
 
