@@ -16,14 +16,14 @@ Entity
  - 一樣"東西", 作用是讓Component依附上它!
  
 System
-  - 監察需要的Component變化, 並可以得知有關Entity是誰
-	特殊 System:
-		Scene Management System
-		- 根據 SceneConfig 中的 SceneType會載入不同的Subsystem
+ - 監察需要的Component變化, 並可以得知有關Entity是誰
+		特殊 System:
+			Scene Management System
+			- 根據 SceneConfig 中的 SceneType會載入不同的Subsystem
       
 Component
-  - 主要Component, 遊戲資料的載體 沒有邏輯在內 可以分拆得十分仔細
-	   特殊 Component:
+ - 主要Component, 遊戲資料的載體 沒有邏輯在內 可以分拆得十分仔細
+		特殊 Component:
 			Scene Config
 			- 儲存現時場景的 SceneType
 
