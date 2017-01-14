@@ -10,27 +10,29 @@ using System.Collections;
 using Entitas;
 
 public class TimeSystem : IInitializeSystem, IExecuteSystem {
-    #region Fields
-    private Context CTX;
-    private Group gNewTimeListener;
-    private float _nextTime = 0;
-    #endregion
+	#region Fields
 
-    public void Execute() {
-        var newTick = CTX.tick.CurrentTick + 1;
-        CTX.ReplaceTick(newTick);
-        if (Time.time >= _nextTime) {
-            CTX.ReplaceSecond(_nextTime);
-            _nextTime += 1;
-        }
-        foreach (var entity in gNewTimeListener.GetEntities()) {
-            entity.timeListener.Notify(newTick);
-        }
-    }
+	private Context CTX;
+	private Group gNewTimeListener;
+	private float _nextTime = 0;
 
-    public void Initialize() {
-        CTX = Contexts.sharedInstance.core;
-        gNewTimeListener = CTX.GetGroup(CoreMatcher.TimeListener);
-        CTX.ReplaceTick(0);
-    }
+	#endregion
+
+	public void Execute() {
+		//var newTick = CTX.tick.CurrentTick + 1;
+		//CTX.ReplaceTick(newTick);
+		if (Time.time >= _nextTime) {
+			//CTX.ReplaceSecond(_nextTime);
+			_nextTime += 1;
+		}
+		foreach (var entity in gNewTimeListener.GetEntities()) {
+			//entity.timeListener.Notify(newTick);
+		}
+	}
+
+	public void Initialize() {
+		CTX = Contexts.sharedInstance.core;
+		//gNewTimeListener = CTX.GetGroup(CoreMatcher.TimeListener);
+		//CTX.ReplaceTick(0);
+	}
 }

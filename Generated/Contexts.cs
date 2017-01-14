@@ -14,18 +14,12 @@ namespace Entitas {
             return CreateContext("Core", CoreComponentIds.TotalComponents, CoreComponentIds.componentNames, CoreComponentIds.componentTypes);
         }
 
-        public static Context CreateEffectContext() {
-            return CreateContext("Effect", EffectComponentIds.TotalComponents, EffectComponentIds.componentNames, EffectComponentIds.componentTypes);
-        }
-
-        public Context[] allContexts { get { return new [] { core, effect }; } }
+        public Context[] allContexts { get { return new [] { core }; } }
 
         public Context core;
-        public Context effect;
 
         public void SetAllContexts() {
             core = CreateCoreContext();
-            effect = CreateEffectContext();
         }
     }
 }

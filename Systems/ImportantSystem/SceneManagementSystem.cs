@@ -17,76 +17,77 @@ using UniRx;
 /// separate which scene type using different sort of subsystem
 /// </summary>
 public class SceneManagementSystem : ReactiveSystem {
-    #region Constants
-    public static Dictionary<string, object> SceneLoadingParameter = new Dictionary<string, object>();
-    #endregion
+	#region Constants
 
-    #region Fields
-    private Context CTX;
-    private SceneLoader _sceneLoader;
-    #endregion
+	public static Dictionary<string, object> SceneLoadingParameter = new Dictionary<string, object>();
 
-    public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName) {
-        Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
-    }
+	#endregion
 
-    public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName, string transitionScene) {
-        Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
-    }
+	#region Fields
 
-    private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
-        BGMData bgmdata = Resources.LoadAll<BGMData>("BGMData").SingleOrDefault(o=>o.SceneType == sceneType);
-        SoundManager.Instance.PlayBGM(bgmdata);
-    }
+	private Context CTX;
+	private SceneLoader _sceneLoader;
 
-    protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.SceneConfig, GroupEvent.Added);
-    }
+	#endregion
 
-    protected override void Execute(List<Entity> entities) {
-        // execute Coroutine logic in a monobehaviour
-        if (!string.IsNullOrEmpty(CTX.sceneConfig.TargetScene)) {
-            _sceneLoader.StartCoroutine("LoadScene");
-        }
+	public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName) {
+		Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
+	}
 
-        // run subsystems
-        var subsystems = new Feature("Systems");
-        switch (CTX.sceneConfig.CurrentSceneType) {
-            case SceneConfig.SceneType.Menu:
-                break;
-            case SceneConfig.SceneType.Game:
-                subsystems
-                    .Add(new ViewCreationSystem(CTX))
-                    .Add(new AnimatronicMovementSystem(CTX))
-                    .Add(new AnimatronicViewRenderingSystem(CTX))
-                    .Add(new PowerConsumtionSystem())
-                    .Add(new PowerMonitoringSystem(CTX))
-                    .Add(new LoadMonitoringSystem(CTX))
-                    .Add(new DoorSwitchSystem(CTX))
-                    .Add(new CCTVOnOffSystem(CTX))
-                    .Add(new CCTVSwitchingSystem(CTX))
-                    ;
-                break;
-            default:
-                throw new InvalidOperationException();
-        }
+	public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName, string transitionScene) {
+		Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
+	}
 
-        PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
+	private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
+		BGMData bgmdata = Resources.LoadAll<BGMData>("BGMData").SingleOrDefault(o => o.SceneType == sceneType);
+		SoundManager.Instance.PlayBGM(bgmdata);
+	}
 
-        Bootstrapper.Instance.UpdateSubsystems(subsystems);
-        Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
-    }
+	protected override Collector GetTrigger(Context context) {
+		return context.CreateCollector(CoreMatcher.SceneConfig, GroupEvent.Added);
+	}
 
-    public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
-        CTX = context;
-        _sceneLoader = sceneLoader;
-    }
+	protected override void Execute(List<Entity> entities) {
+		// execute Coroutine logic in a monobehaviour
+		if (!string.IsNullOrEmpty(CTX.sceneConfig.TargetScene)) {
+			_sceneLoader.StartCoroutine("LoadScene");
+		}
 
-    public SceneManagementSystem(Context context) : base(context) {
-        CTX = context;
-    }
+		// run subsystems
+		var subsystems = new Feature("Systems");
+		switch (CTX.sceneConfig.CurrentSceneType) {
+			case SceneConfig.SceneType.Menu:
+				break;
+			case SceneConfig.SceneType.Game:
+				break;
+			default:
+				throw new InvalidOperationException();
+		}
 
-    public SceneManagementSystem(Collector collector) : base(collector) {
+		PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
+
+		Bootstrapper.Instance.UpdateSubsystems(subsystems);
+		Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
+	}
+
+	public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
+		CTX = context;
+		_sceneLoader = sceneLoader;
+	}
+
+	public SceneManagementSystem(Context context) : base(context) {
+		CTX = context;
+	}
+
+	public SceneManagementSystem(Collector collector) : base(collector) {
         
-    }
+	}
+
+	#region implemented abstract members of ReactiveSystem
+
+	protected override bool Filter(Entity entity) {
+		return true;
+	}
+
+	#endregion
 }
