@@ -1,4 +1,4 @@
-# FGF
+# Furion Game Framework (based on Entita)
 Furion Game Framework
 
 
