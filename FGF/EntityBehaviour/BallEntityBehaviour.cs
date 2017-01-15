@@ -10,14 +10,18 @@ public class BallEntityBehaviour : EntityBehaviour {
 
     public string BallName;
 
-    void Awake() {
-        Initialize(Contexts.sharedInstance.core, e => {
-            e.AddBall(LifePoint, BallName);
-            e.AddView(this.gameObject);
-        });
+    public override Context Context {
+        get { return Contexts.sharedInstance.core; }
     }
 
+    public override void Setup() {
+        Entity.AddBall(BallName);
+        Entity.AddHP(LifePoint);
+        Entity.AddView(this.gameObject);
+    }
+
+
     void OnMouseDown() {
-        Entity.ReplaceBall(Entity.ball.BallLife - 5, Entity.ball.BallName);
+        Entity.ReplaceHP(Entity.hP.Point - 5);
     }
 }

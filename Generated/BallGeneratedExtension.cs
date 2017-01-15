@@ -15,16 +15,14 @@ namespace Entitas {
         public Ball ball { get { return (Ball)GetComponent(CoreComponentIds.Ball); } }
         public bool hasBall { get { return HasComponent(CoreComponentIds.Ball); } }
 
-        public Entity AddBall(int newBallLife, string newBallName) {
+        public Entity AddBall(string newBallName) {
             var component = CreateComponent<Ball>(CoreComponentIds.Ball);
-            component.BallLife = newBallLife;
             component.BallName = newBallName;
             return AddComponent(CoreComponentIds.Ball, component);
         }
 
-        public Entity ReplaceBall(int newBallLife, string newBallName) {
+        public Entity ReplaceBall(string newBallName) {
             var component = CreateComponent<Ball>(CoreComponentIds.Ball);
-            component.BallLife = newBallLife;
             component.BallName = newBallName;
             ReplaceComponent(CoreComponentIds.Ball, component);
             return this;

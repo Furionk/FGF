@@ -25,7 +25,7 @@ public class BallViewRenderingSystem : ReactiveSystem {
         foreach (var entity in entities) {
             if (!entity.hasView) {
                 var go = GameObject.Instantiate(entity.viewResources.Value);
-                go.GetComponent<BallEntityBehaviour>().Inject(entity);
+                go.GetComponent<BallEntityBehaviour>().Inject(ctx, entity);
                 go.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(0, 5));
                 entity.AddView(go);
             }

@@ -16,7 +16,7 @@ public class BallExplodeSystem : ReactiveSystem {
     }
 
     protected override Collector GetTrigger(Context context) {
-        return context.CreateCollector(CoreMatcher.Ball, GroupEvent.Added);
+        return context.CreateCollector(Matcher.AllOf(CoreMatcher.Ball, CoreMatcher.HP), GroupEvent.Added);
     }
 
     protected override bool Filter(Entity entity) {
@@ -26,9 +26,9 @@ public class BallExplodeSystem : ReactiveSystem {
     protected override void Execute(List<Entity> entities) {
         // for each entity which have Ball component and being modified
         foreach (var entity in entities) {
-            if (entity.ball.BallLife <= 0) {
+            if (entity.hP.Point <= 0) {
                 GameObject.Destroy(entity.view.Value.gameObject);
-                entity.Release(ctx);
+                ctx.DestroyEntity(entity);
             }
         }
     }

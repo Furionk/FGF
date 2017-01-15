@@ -1,12 +1,25 @@
-﻿using System.Collections;
+﻿// Solution Name: FGF
+// Project: FGF
+// File: Ball.cs
+// 
+// By: Furion
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:23
+
+using System.Collections;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 [Core]
 public class Ball : IComponent {
-
-    public int BallLife;
+    #region Fields
     public string BallName;
+    #endregion
+}
 
+[Core]
+public class HP : IComponent {
+    #region Fields
+    public int Point;
+    #endregion
 }

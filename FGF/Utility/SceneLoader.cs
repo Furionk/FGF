@@ -31,6 +31,7 @@ public class SceneLoader : UnityEngine.MonoBehaviour {
         Bootstrapper.Instance.CurrentSceneType = ctx.sceneConfig.CurrentSceneType;
         Bootstrapper.Instance.UpdateSubsystems(subsystems);
 
+        Bootstrapper.EventAggregator.Publish(new SceneLoadEndMessage());
         foreach (var entity in ctx.GetGroup(CoreMatcher.SceneLoadEndListener).GetEntities()) {
             entity.sceneLoadEndListener.Notify(new SceneLoadEndMessage());
         }

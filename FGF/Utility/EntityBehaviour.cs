@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia
+﻿// Solution Name: FGF
+// Project: FGF
 // File: EntityBehaviour.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 12 - 20:55
+// Last Pinned Datetime: 2017 / 01 / 15 - 15:53
 
 using System;
 using UnityEngine;
@@ -22,59 +22,49 @@ public class EntityBehaviour : MonoBehaviour {
     #endregion
 
     #region Properties
-    public Entity Entity {
-        get;
-        set;
-    }
-    public Context ctx {
-        get;
-        set;
-    }
+    public Entity Entity { get; set; }
+    public virtual Context Context { get; private set; }
+    private IDisposable SceneLoadEndSubscription { get; set; }
     #endregion
 
-    public virtual void Inject(Entity e) {
+    public virtual void Awake() {
+        SceneLoadEndSubscription = OnEvent<SceneLoadEndMessage>()
+            .Subscribe(msg => {
+                if (!EntityInjected) {
+                    Entity = Context.CreateEntity();
+                    Setup();
+                }
+            });
+    }
+
+
+    /// <summary>
+    /// implmenete your initialize logic in here if it is 
+    /// </summary>
+    /// <param name="e"></param>
+    public virtual void Setup() {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// call it if you already created from system
+    /// </summary>
+    /// <param name="e"></param>
+    public virtual void Inject(Context ctx, Entity e) {
+        Context = ctx;
         EntityInjected = true;
         Entity = e;
     }
 
-    public virtual Entity Initialize(Context whichContext) {
-        if (EntityInjected) return Entity;
-        ctx = whichContext;
-        Entity = ctx.CreateEntity();
-        return Entity;
-    }
-
-    public virtual Entity Initialize(Context whichContext, Action<Entity> awakeSetup, Action<Entity> startSetup) {
-        if (EntityInjected) return Entity;
-        ctx = whichContext;
-        Entity = ctx.CreateEntity();
-        StartSetup = startSetup;
-        awakeSetup(Entity);
-        return Entity;
-    }
-
-    public virtual Entity Initialize(Context whichContext, Action<Entity> startSetup) {
-        if (EntityInjected) return Entity;
-        ctx = whichContext;
-        Entity = ctx.CreateEntity();
-        StartSetup = startSetup;
-        return Entity;
-    }
-
-    public virtual void Start() {
-        if (EntityInjected) return;
-        if (Entity != null && StartSetup != null) {
-            StartSetup(Entity);
-        } else if (Entity == null) {
-            Debug.LogError(Entity + "cannot be initialized.");
-        }
-    }
 
     public virtual void OnDestroy() {
         if (Entity != null) {
             Entity.destroy();
         } else {
             Debug.LogWarning("[" + gameObject.name + "] has no entity when destory!");
+        }
+        if (SceneLoadEndSubscription != null) {
+            SceneLoadEndSubscription.Dispose();
         }
     }
 
