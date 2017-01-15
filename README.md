@@ -1,5 +1,6 @@
 <h1>Furion Game Framework</h1>
-<p>這是Furion基於Entita之上的Unity遊戲製作框架，將所有Code放進Unity的Asset資料夾就可以使用。</p>
+<p>這是Furion基於Entitas之上的Unity遊戲製作框架，將所有Code放進Unity的Asset資料夾就可以使用。</p>
+<p>主要是基於ECS概念後再增加View, 事件管理, 以及配合Unity的場景管理系統</p>
 <ul>
 <li>
 <h2>Bootstrapper</h2>
