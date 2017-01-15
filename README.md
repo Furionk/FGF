@@ -17,7 +17,10 @@
 <li>Listener Component<br />
 <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">用於接收自訂事件，必須實作 IHandle&lt;T&gt; 的 Callback</blockquote>
 </li>
-<li>View</li>
+<li>View
+  <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">用於讓System直接操作Game Object的連繫</blockquote>
+  </li>
+ 
 </ul>
 </li>
 <li>
@@ -28,7 +31,9 @@
 <br />能夠監察Component變化, 並可以得知有關Entity是誰，遊戲的主要邏輯亦在此進行。<br />所有System定義於 /Systems 之內<br />
 <h3>Furion Defined:</h3>
 <ul>
-<li>Scene Management System<br /> 主要的場景管理系統，能夠監察 Scene Config 的變化載入不同的子 System，並且會載入對應的 Unity Scene<br />至於 Scene Type 及 Subsystem 的對應定義在 /Components/SceneConfig.cs之中</li>
+<li>Scene Management System<br />
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">主要的場景管理系統，能夠監察 Scene Config 的變化載入不同的子 System，並且會載入對應的 Unity Scene<br />至於 Scene Type 及 Subsystem 的對應定義在 /Components/SceneConfig.cs之中</blockquote>
+</li>
 </ul>
 </li>
 <li>
