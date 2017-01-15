@@ -1,27 +1,35 @@
-﻿using System;
+﻿// Solution Name: FGF
+// Project: FGF
+// File: BallEntityBehaviour.cs
+// 
+// By: Furion
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 public class BallEntityBehaviour : EntityBehaviour {
-
+    #region Fields
     public int LifePoint;
-
     public string BallName;
+    #endregion
 
+    #region Properties
     public override Context Context {
         get { return Contexts.sharedInstance.core; }
     }
+    #endregion
 
     public override void Setup() {
         Entity.AddBall(BallName);
         Entity.AddHP(LifePoint);
-        Entity.AddView(this.gameObject);
+        Entity.AddView(gameObject);
     }
 
-
-    void OnMouseDown() {
+    private void OnMouseDown() {
         Entity.ReplaceHP(Entity.hP.Point - 5);
     }
 }

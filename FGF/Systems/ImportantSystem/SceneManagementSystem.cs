@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia
+﻿// Solution Name: FGF
+// Project: FGF
 // File: SceneManagementSystem.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 05 - 0:16
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -17,42 +17,40 @@ using UniRx;
 /// separate which scene type using different sort of subsystem
 /// </summary>
 public class SceneManagementSystem : ReactiveSystem {
-	#region Constants
+    #region Constants
+    public static Dictionary<string, object> SceneLoadingParameter = new Dictionary<string, object>();
+    #endregion
 
-	public static Dictionary<string, object> SceneLoadingParameter = new Dictionary<string, object>();
+    #region Fields
+    private Context CTX;
+    private SceneLoader _sceneLoader;
+    #endregion
 
-	#endregion
+    public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
+        CTX = context;
+        _sceneLoader = sceneLoader;
+    }
 
-	#region Fields
+    public SceneManagementSystem(Context context) : base(context) {
+        CTX = context;
+    }
 
-	private Context CTX;
-	private SceneLoader _sceneLoader;
+    public SceneManagementSystem(Collector collector) : base(collector) {
+    }
 
-	#endregion
+    public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName) {
+        Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
+    }
 
-	public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName) {
-		Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
-	}
+    public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName, string transitionScene) {
+        Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
+    }
 
-	public static void LoadScene(SceneConfig.SceneType sceneType, string sceneName, string transitionScene) {
-		Contexts.sharedInstance.core.ReplaceSceneConfig(sceneType, sceneName);
-	}
+    protected override Collector GetTrigger(Context context) {
+        return context.CreateCollector(CoreMatcher.SceneConfig, GroupEvent.Added);
+    }
 
-	private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
-		BGMData bgmdata = Resources.LoadAll<BGMData>(AppConstants.ScriptableObjectDataFolder).SingleOrDefault(o => o.SceneType == sceneType);
-	    if (bgmdata == null) {
-            // you can have your own bgm management setting or no bgm
-	        Debug.Log("Cannot find bgm data for the corrsponding scene!");
-	    } else {
-            SoundManager.Instance.PlayBGM(bgmdata);
-        }
-	}
-
-	protected override Collector GetTrigger(Context context) {
-		return context.CreateCollector(CoreMatcher.SceneConfig, GroupEvent.Added);
-	}
-
-	protected override void Execute(List<Entity> entities) {
+    protected override void Execute(List<Entity> entities) {
         // execute Coroutine logic in a monobehaviour
         _sceneLoader.StartCoroutine("LoadScene");
 
@@ -65,25 +63,19 @@ public class SceneManagementSystem : ReactiveSystem {
         ////Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
     }
 
+    #region implemented abstract members of ReactiveSystem
+    protected override bool Filter(Entity entity) {
+        return true;
+    }
+    #endregion
 
-    public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
-		CTX = context;
-		_sceneLoader = sceneLoader;
-	}
-
-	public SceneManagementSystem(Context context) : base(context) {
-		CTX = context;
-	}
-
-	public SceneManagementSystem(Collector collector) : base(collector) {
-        
-	}
-
-	#region implemented abstract members of ReactiveSystem
-
-	protected override bool Filter(Entity entity) {
-		return true;
-	}
-
-	#endregion
+    private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
+        BGMData bgmdata = Resources.LoadAll<BGMData>(AppConstants.ScriptableObjectDataFolder).SingleOrDefault(o => o.SceneType == sceneType);
+        if (bgmdata == null) {
+            // you can have your own bgm management setting or no bgm
+            Debug.Log("Cannot find bgm data for the corrsponding scene!");
+        } else {
+            SoundManager.Instance.PlayBGM(bgmdata);
+        }
+    }
 }

@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia
+﻿// Solution Name: FGF
+// Project: FGF
 // File: SoundManager.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 14 - 16:36
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour {
         currentBGMData = newBGMData;
     }
 
-    void Update() {
+    private void Update() {
         if (!BGMAudioSource.isPlaying && currentBGMData != null) {
             if (currentBGMData.Clips.Length > 0) {
                 BGMAudioSource.clip = currentBGMData.Clips[Random.Range(0, currentBGMData.Clips.Length - 1)];

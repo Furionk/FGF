@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿// Solution Name: FGF
+// Project: FGF
+// File: WinLogicSystem.cs
+// 
+// By: Furion
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
+
+using System.Collections;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 public class WinLogicSystem : ReactiveSystem {
-
+    #region Fields
     private Context ctx;
+    #endregion
 
     public WinLogicSystem(Context context) : base(context) {
         ctx = context;

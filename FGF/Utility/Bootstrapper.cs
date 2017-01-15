@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia.CSharp
-// File: Kernel.cs
+﻿// Solution Name: FGF
+// Project: FGF
+// File: Bootstrapper.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2016 / 11 / 04 - 20:42
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using UnityEngine;
 using System.Collections;
@@ -35,6 +35,17 @@ public class Bootstrapper : MonoBehaviour {
         set { _eventAggregator = value; }
     }
     #endregion
+
+    public void UpdateSubsystems(Systems subSystems) {
+        if (_subSystems != null) {
+            _subSystems.DeactivateReactiveSystems();
+            _subSystems.ClearReactiveSystems();
+            _subSystems.Cleanup();
+            _subSystems.TearDown();
+        }
+        _subSystems = subSystems;
+        _subSystems.Initialize();
+    }
 
     private void Awake() {
         if (Instance != null) {
@@ -72,20 +83,9 @@ public class Bootstrapper : MonoBehaviour {
 
     private Systems CreateImportantSystems(Contexts contexts) {
         return new Feature("Systems")
-        .Add(new TimeSystem())
-        .Add(new InitSystem())
-        .Add(new SceneManagementSystem(contexts.core, GetComponent<SceneLoader>()))
-        ;
-    }
-
-    public void UpdateSubsystems(Systems subSystems) {
-        if (_subSystems != null) {
-            _subSystems.DeactivateReactiveSystems();
-            _subSystems.ClearReactiveSystems();
-            _subSystems.Cleanup();
-            _subSystems.TearDown();
-        }
-        _subSystems = subSystems;
-        _subSystems.Initialize();
+            .Add(new TimeSystem())
+            .Add(new InitSystem())
+            .Add(new SceneManagementSystem(contexts.core, GetComponent<SceneLoader>()))
+            ;
     }
 }

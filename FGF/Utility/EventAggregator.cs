@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia.CSharp
+﻿// Solution Name: FGF
+// Project: FGF
 // File: EventAggregator.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2016 / 11 / 01 - 18:56
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -21,14 +21,14 @@ public class EventAggregator : IEventAggregator, ISubject<object> {
     private bool isDisposed;
     #endregion
 
+    public void Dispose() {
+        Dispose(true);
+    }
+
     protected virtual void Dispose(bool disposing) {
         if (isDisposed) return;
         eventsSubject.Dispose();
         isDisposed = true;
-    }
-
-    public void Dispose() {
-        Dispose(true);
     }
 
     public IObservable<TEvent> GetEvent<TEvent>() {

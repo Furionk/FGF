@@ -3,7 +3,7 @@
 // File: EntityBehaviour.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 15 - 15:53
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -37,7 +37,6 @@ public class EntityBehaviour : MonoBehaviour {
             });
     }
 
-
     /// <summary>
     /// implmenete your initialize logic in here if it is 
     /// </summary>
@@ -55,7 +54,6 @@ public class EntityBehaviour : MonoBehaviour {
         EntityInjected = true;
         Entity = e;
     }
-
 
     public virtual void OnDestroy() {
         if (Entity != null) {

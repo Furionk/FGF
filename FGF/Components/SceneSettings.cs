@@ -1,4 +1,11 @@
-﻿using System;
+﻿// Solution Name: FGF
+// Project: FGF
+// File: SceneSettings.cs
+// 
+// By: Furion
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entitas;
@@ -15,23 +22,20 @@ public class SceneConfig : IComponent {
     }
 
     #region Fields
-
     public SceneType CurrentSceneType;
     public string TargetScene;
-
     #endregion
-
 
     public Feature SceneMapping(SceneType currentSceneType) {
         var subsystems = new Feature("Systems");
         switch (currentSceneType) {
-            case SceneConfig.SceneType.Menu:
+            case SceneType.Menu:
                 break;
-            case SceneConfig.SceneType.Game:
+            case SceneType.Game:
                 subsystems.Add(new BallExplodeSystem(Contexts.sharedInstance.core));
                 subsystems.Add(new WinLogicSystem(Contexts.sharedInstance.core));
                 break;
-            case SceneConfig.SceneType.RealTimeGame:
+            case SceneType.RealTimeGame:
                 subsystems.Add(new RealTimeInitializeSystem());
                 subsystems.Add(new BallViewRenderingSystem(Contexts.sharedInstance.core));
                 subsystems.Add(new BallExplodeSystem(Contexts.sharedInstance.core));
@@ -42,5 +46,4 @@ public class SceneConfig : IComponent {
         }
         return subsystems;
     }
-
 }

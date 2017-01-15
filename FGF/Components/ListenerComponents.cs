@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia
+﻿// Solution Name: FGF
+// Project: FGF
 // File: ListenerComponents.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 11 - 23:48
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -11,7 +11,8 @@ using System.Collections;
 using Entitas;
 
 [Core]
-public class SceneLoadProgressListener : Listener<SceneLoadProgressMessage>, IComponent {}
+public class SceneLoadProgressListener : Listener<SceneLoadProgressMessage>, IComponent {
+}
 
 [Core]
 public class SceneLoadProgressMessage {
@@ -21,18 +22,21 @@ public class SceneLoadProgressMessage {
 }
 
 [Core]
-public class SceneLoadStartListener : Listener<SceneLoadStartMessage>, IComponent {}
+public class SceneLoadStartListener : Listener<SceneLoadStartMessage>, IComponent {
+}
 
 [Core]
-public class SceneLoadStartMessage {}
+public class SceneLoadStartMessage {
+}
 
 [Core]
-public class SceneLoadEndListener : Listener<SceneLoadEndMessage>, IComponent {}
+public class SceneLoadEndListener : Listener<SceneLoadEndMessage>, IComponent {
+}
 
 [Core]
-public class SceneLoadEndMessage {}
+public class SceneLoadEndMessage {
+}
 
 [Core]
 public class TimeListener : Listener<long>, IComponent {
-	
 }

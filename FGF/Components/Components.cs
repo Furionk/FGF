@@ -1,9 +1,9 @@
-﻿// Solution Name: Area.Entitia
-// Project: Area.Entitia
+﻿// Solution Name: FGF
+// Project: FGF
 // File: Components.cs
 // 
 // By: Furion
-// Last Pinned Datetime: 2017 / 01 / 12 - 21:12
+// Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
 using UnityEngine;
@@ -22,49 +22,37 @@ using Entitas.CodeGenerator;
 [SingleEntity]
 [Core]
 public class Subsystems : IComponent {
-	#region Fields
-
-	public Systems Systems;
-
-	#endregion
+    #region Fields
+    public Systems Systems;
+    #endregion
 }
 
 [SingleEntity]
 [Core]
 public class Tick : IComponent {
-	#region Fields
-
-	public long CurrentTick;
-
-	#endregion
+    #region Fields
+    public long CurrentTick;
+    #endregion
 }
 
 [SingleEntity]
 [Core]
 public class Second : IComponent {
-	#region Fields
-
-	public float PassedSeconds;
-
-	#endregion
+    #region Fields
+    public float PassedSeconds;
+    #endregion
 }
 
 [Core]
 public class ViewResources : IComponent {
     #region Fields
-
     public GameObject Value;
-
     #endregion
 }
 
-
 [Core]
 public class View : IComponent {
-	#region Fields
-
-	public GameObject Value;
-
-	#endregion
+    #region Fields
+    public GameObject Value;
+    #endregion
 }
-	
