@@ -9,13 +9,6 @@ using Entitas;
 using Entitas.CodeGenerator;
 using UnityEngine;
 
-////// Naming convention
-
-////// EntityBehaviour
-//////    - A monobehaviour with entity
-
-////// Listener_{...}
-//////    - A component means this mono will receive the specified event.
 [SingleEntity]
 [Core]
 public class Subsystems : IComponent {
