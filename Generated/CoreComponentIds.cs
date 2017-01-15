@@ -8,22 +8,25 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentIds {
 
-    public const int SceneConfig = 0;
-    public const int SceneLoadEndListener = 1;
-    public const int SceneLoadEndMessage = 2;
-    public const int SceneLoadProgressListener = 3;
-    public const int SceneLoadProgressMessage = 4;
-    public const int SceneLoadStartListener = 5;
-    public const int SceneLoadStartMessage = 6;
-    public const int Second = 7;
-    public const int Subsystems = 8;
-    public const int Tick = 9;
-    public const int TimeListener = 10;
-    public const int View = 11;
+    public const int Ball = 0;
+    public const int SceneConfig = 1;
+    public const int SceneLoadEndListener = 2;
+    public const int SceneLoadEndMessage = 3;
+    public const int SceneLoadProgressListener = 4;
+    public const int SceneLoadProgressMessage = 5;
+    public const int SceneLoadStartListener = 6;
+    public const int SceneLoadStartMessage = 7;
+    public const int Second = 8;
+    public const int Subsystems = 9;
+    public const int Tick = 10;
+    public const int TimeListener = 11;
+    public const int View = 12;
+    public const int ViewResources = 13;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
+        "Ball",
         "SceneConfig",
         "SceneLoadEndListener",
         "SceneLoadEndMessage",
@@ -35,10 +38,12 @@ public static class CoreComponentIds {
         "Subsystems",
         "Tick",
         "TimeListener",
-        "View"
+        "View",
+        "ViewResources"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Ball),
         typeof(SceneConfig),
         typeof(SceneLoadEndListener),
         typeof(SceneLoadEndMessageComponent),
@@ -50,6 +55,7 @@ public static class CoreComponentIds {
         typeof(Subsystems),
         typeof(Tick),
         typeof(TimeListener),
-        typeof(View)
+        typeof(View),
+        typeof(ViewResources)
     };
 }
