@@ -19,7 +19,7 @@
 <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">儲存現時場景的 Scene Type, 在 Bootstrapper 去定義現時的Scene Type。</blockquote>
 </li>
 <li>Listener Component<br />
-<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">用於接收自訂事件，必須實作 IHandle&lt;T&gt; 的 Callback</blockquote>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">用於接收自訂事件，指向實作 IHandle&lt;T&gt; 的 Callback</blockquote>
 </li>
 <li>View
   <blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">用於讓System直接操作Game Object的連繫</blockquote>
