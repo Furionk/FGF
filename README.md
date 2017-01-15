@@ -1,5 +1,4 @@
-<p># Furion Game Framework (based on Entita)</p>
-<p>請另外下載 Entitas 共用之<br />https://github.com/sschmid/Entitas-CSharp<br />版本為3.6.1</p>
+<p>&nbsp;</p>
 <ul>
 <li>
 <h2>Bootstrapper</h2>
