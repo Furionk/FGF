@@ -5,15 +5,13 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System.Collections;
-using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 public class RealTimeInitializeSystem : IInitializeSystem {
     public void Initialize() {
-        for (int i = 0; i < 5; i++) {
-            string viewName = Random.Range(0,
+        for (var i = 0; i < 5; i++) {
+            var viewName = Random.Range(0,
                 2) == 0 ? "Cylinder" : "Capsule";
             var e = Contexts.sharedInstance.core.CreateEntity();
             e.AddBall("REALTIME BALL");

@@ -5,16 +5,13 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System;
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Entitas;
-using UniRx;
+using UnityEngine;
 
 /// <summary>
-/// separate which scene type using different sort of subsystem
+///     separate which scene type using different sort of subsystem
 /// </summary>
 public class SceneManagementSystem : ReactiveSystem {
     #region Constants
@@ -23,7 +20,7 @@ public class SceneManagementSystem : ReactiveSystem {
 
     #region Fields
     private Context CTX;
-    private SceneLoader _sceneLoader;
+    private readonly SceneLoader _sceneLoader;
     #endregion
 
     public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
@@ -70,7 +67,7 @@ public class SceneManagementSystem : ReactiveSystem {
     #endregion
 
     private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
-        BGMData bgmdata = Resources.LoadAll<BGMData>(AppConstants.ScriptableObjectDataFolder).SingleOrDefault(o => o.SceneType == sceneType);
+        var bgmdata = Resources.LoadAll<BGMData>(AppConstants.ScriptableObjectDataFolder).SingleOrDefault(o => o.SceneType == sceneType);
         if (bgmdata == null) {
             // you can have your own bgm management setting or no bgm
             Debug.Log("Cannot find bgm data for the corrsponding scene!");

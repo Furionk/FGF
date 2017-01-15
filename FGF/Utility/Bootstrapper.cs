@@ -5,14 +5,11 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using UnityEngine;
-using System.Collections;
-using System.Linq;
 using Entitas;
+using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour {
     #region Constants
-    private static Bootstrapper _instace;
     private static IEventAggregator _eventAggregator;
     #endregion
 
@@ -26,10 +23,7 @@ public class Bootstrapper : MonoBehaviour {
     #endregion
 
     #region Properties
-    public static Bootstrapper Instance {
-        get { return _instace; }
-        set { _instace = value; }
-    }
+    public static Bootstrapper Instance { get; set; }
     public static IEventAggregator EventAggregator {
         get { return _eventAggregator ?? (_eventAggregator = new EventAggregator()); }
         set { _eventAggregator = value; }

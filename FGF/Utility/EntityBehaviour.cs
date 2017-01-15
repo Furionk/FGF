@@ -6,14 +6,13 @@
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
-using UnityEngine;
-using System.Collections;
 using Entitas;
 using UniRx;
+using UnityEngine;
 
 /// <summary>
-/// EntityBehaviour is for game object which already in a Scene and it needs Entitas feature.
-/// for real time entity creation, a 'view' is good enough to connect scene and entity
+///     EntityBehaviour is for game object which already in a Scene and it needs Entitas feature.
+///     for real time entity creation, a 'view' is good enough to connect scene and entity
 /// </summary>
 public class EntityBehaviour : MonoBehaviour {
     #region Fields
@@ -38,7 +37,7 @@ public class EntityBehaviour : MonoBehaviour {
     }
 
     /// <summary>
-    /// implmenete your initialize logic in here if it is 
+    ///     implmenete your initialize logic in here if it is
     /// </summary>
     /// <param name="e"></param>
     public virtual void Setup() {
@@ -46,7 +45,7 @@ public class EntityBehaviour : MonoBehaviour {
     }
 
     /// <summary>
-    /// call it if you already created from system
+    ///     call it if you already created from system
     /// </summary>
     /// <param name="e"></param>
     public virtual void Inject(Context ctx, Entity e) {

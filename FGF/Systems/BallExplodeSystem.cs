@@ -5,15 +5,13 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Entitas;
 using UnityEngine;
 
 public class BallExplodeSystem : ReactiveSystem {
     #region Fields
-    private Context ctx;
+    private readonly Context ctx;
     #endregion
 
     public BallExplodeSystem(Context context) : base(context) {

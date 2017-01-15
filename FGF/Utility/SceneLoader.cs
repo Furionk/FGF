@@ -5,23 +5,24 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using UnityEngine;
 using System.Collections;
 using Entitas;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
     private IEnumerator LoadScene() {
         //AsyncOperation async = UnityEngine.SceneManagement.SceneManager.UnloadScene(pPool.sceneConfig.TargetScene);
-        Context ctx = Contexts.sharedInstance.core;
+        var ctx = Contexts.sharedInstance.core;
         foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadStartListener).GetEntities()) {
             entity.sceneLoadStartListener.Notify(new SceneLoadStartMessage());
         }
         if (!string.IsNullOrEmpty(ctx.sceneConfig.TargetScene)) {
-            AsyncOperation async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
+            var async = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
             while (!async.isDone) {
                 Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
                 foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
-                    entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage() {
+                    entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage {
                         Progress = async.progress
                     });
                 }

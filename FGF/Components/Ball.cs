@@ -5,10 +5,7 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System.Collections;
-using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 [Core]
 public class Ball : IComponent {

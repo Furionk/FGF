@@ -6,11 +6,8 @@
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGenerator;
-using UnityEngine;
 
 [SingleEntity]
 [Core]
@@ -18,7 +15,7 @@ public class SceneConfig : IComponent {
     public enum SceneType {
         Menu,
         Game,
-        RealTimeGame,
+        RealTimeGame
     }
 
     #region Fields

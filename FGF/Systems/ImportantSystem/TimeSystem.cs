@@ -5,14 +5,13 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using UnityEngine;
-using System.Collections;
 using Entitas;
+using UnityEngine;
 
 public class TimeSystem : IInitializeSystem, IExecuteSystem {
     #region Fields
     private Context CTX;
-    private float _nextTime = 0;
+    private float _nextTime;
     #endregion
 
     public void Execute() {

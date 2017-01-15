@@ -5,11 +5,7 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 public class BallEntityBehaviour : EntityBehaviour {
     #region Fields

@@ -6,8 +6,6 @@
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System;
-using UnityEngine;
-using System.Collections;
 using UniRx;
 
 public interface IEventAggregator {

@@ -5,14 +5,13 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System.Collections;
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
 public class BallViewRenderingSystem : ReactiveSystem {
     #region Fields
-    private Context ctx;
+    private readonly Context ctx;
     #endregion
 
     public BallViewRenderingSystem(Context context) : base(context) {
