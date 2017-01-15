@@ -33,9 +33,9 @@ public class SceneConfig : IComponent {
                 break;
             case SceneConfig.SceneType.RealTimeGame:
                 subsystems.Add(new RealTimeInitializeSystem());
+                subsystems.Add(new BallViewRenderingSystem(Contexts.sharedInstance.core));
                 subsystems.Add(new BallExplodeSystem(Contexts.sharedInstance.core));
                 subsystems.Add(new WinLogicSystem(Contexts.sharedInstance.core));
-                subsystems.Add(new BallViewRenderingSystem(Contexts.sharedInstance.core));
                 break;
             default:
                 throw new InvalidOperationException();

@@ -53,23 +53,17 @@ public class SceneManagementSystem : ReactiveSystem {
 	}
 
 	protected override void Execute(List<Entity> entities) {
-		// execute Coroutine logic in a monobehaviour
-		if (!string.IsNullOrEmpty(CTX.sceneConfig.TargetScene)) {
-			_sceneLoader.StartCoroutine("LoadScene");
-		}
+        // execute Coroutine logic in a monobehaviour
+        _sceneLoader.StartCoroutine("LoadScene");
 
-		// run subsystems
-        var subsystems = CTX.sceneConfig.SceneMapping(CTX.sceneConfig.CurrentSceneType);
-        Bootstrapper.Instance.CurrentSceneType = CTX.sceneConfig.CurrentSceneType;
-        Bootstrapper.Instance.UpdateSubsystems(subsystems);
-
-        // custom scene change logic
-        PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
-
-
-
-		Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
-	}
+        ////// run subsystems
+        ////      var subsystems = CTX.sceneConfig.SceneMapping(CTX.sceneConfig.CurrentSceneType);
+        ////      Bootstrapper.Instance.CurrentSceneType = CTX.sceneConfig.CurrentSceneType;
+        ////      Bootstrapper.Instance.UpdateSubsystems(subsystems);
+        ////      // custom scene change logic
+        ////      PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
+        ////Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
+    }
 
 
     public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
