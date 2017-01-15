@@ -1,4 +1,4 @@
-<p>&nbsp;</p>
+<h1>Furion Game Framework</h1>
 <ul>
 <li>
 <h2>Bootstrapper</h2>
