@@ -6,7 +6,7 @@
 <br />請務必在所有場景之中放置一個擁有Bootstrapper的Game Object</li>
 <li>
 <h2>Entity</h2>
-<br />一樣"東西", 作用是讓Component依附上它!</li>
+<br />一樣"東西", 作用是讓Component依附上它!，沒有Component的Entity沒有任何意義</li>
 <li>
 <h2>Component</h2>
 <br />遊戲資料的載體 沒有邏輯在內 可以分拆得十分仔細<br />所有Component定義放於 /Components 中<br />
