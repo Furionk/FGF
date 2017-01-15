@@ -10,20 +10,21 @@ using UnityEngine;
 
 public class TimeSystem : IInitializeSystem, IExecuteSystem {
     #region Fields
-    private Context CTX;
+    private Context ctx;
     private float _nextTime;
     #endregion
 
     public void Execute() {
-        //var newTick = CTX.tick.CurrentTick + 1;
-        //CTX.ReplaceTick(newTick);
+        var newTick = ctx.tick.CurrentTick + 1;
+        ctx.ReplaceTick(newTick);
         if (Time.time >= _nextTime) {
-            //CTX.ReplaceSecond(_nextTime);
+            ctx.ReplaceSecond(_nextTime);
             _nextTime += 1;
         }
     }
 
     public void Initialize() {
-        CTX = Contexts.sharedInstance.core;
+        ctx = Contexts.sharedInstance.core;
+        ctx.SetTick(0);
     }
 }

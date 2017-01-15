@@ -17,11 +17,13 @@ using UnityEngine;
 public class EntityBehaviour : MonoBehaviour {
     #region Fields
     public bool EntityInjected;
-    private Action<Entity> StartSetup;
     #endregion
 
     #region Properties
     public Entity Entity { get; set; }
+    /// <summary>
+    /// define which pool this entity will be in
+    /// </summary>
     public virtual Context Context { get; private set; }
     private IDisposable SceneLoadEndSubscription { get; set; }
     #endregion
@@ -37,7 +39,7 @@ public class EntityBehaviour : MonoBehaviour {
     }
 
     /// <summary>
-    ///     implmenete your initialize logic in here if it is
+    ///     implmenet your entity initialize logic in here if this entity is create from scene.
     /// </summary>
     /// <param name="e"></param>
     public virtual void Setup() {
@@ -45,7 +47,7 @@ public class EntityBehaviour : MonoBehaviour {
     }
 
     /// <summary>
-    ///     call it if you already created from system
+    ///     call it if you already created an entity from system.
     /// </summary>
     /// <param name="e"></param>
     public virtual void Inject(Context ctx, Entity e) {
