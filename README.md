@@ -1,4 +1,5 @@
 <h1>Furion Game Framework</h1>
+<p>這是 Furion 基於 Entitas 之上的 Unity 遊戲製作 Framework.</p>
 <ul>
 <li>
 <h2>Bootstrapper</h2>
