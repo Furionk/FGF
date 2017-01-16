@@ -16,7 +16,7 @@ using UnityEngine;
 /// </summary>
 public abstract class EntityBehaviour : MonoBehaviour {
     #region Fields
-    private bool EntityInjected;
+    private bool _entityInjected;
     #endregion
 
     #region Properties
@@ -25,7 +25,6 @@ public abstract class EntityBehaviour : MonoBehaviour {
     ///     define which pool this entity will be in
     /// </summary>
     protected virtual Context Context { get; private set; }
-    private IDisposable SceneLoadEndSubscription { get; set; }
     #endregion
 
     /// <summary>
@@ -47,7 +46,7 @@ public abstract class EntityBehaviour : MonoBehaviour {
     /// </summary>
     /// <param name="e"></param>
     public virtual void Inject(Context ctx, Entity e) {
-        EntityInjected = true;
+        _entityInjected = true;
         Context = ctx;
         Entity = e;
         AfterInitialized();
@@ -59,13 +58,10 @@ public abstract class EntityBehaviour : MonoBehaviour {
         } else {
             Debug.LogWarning("[" + gameObject.name + "] has no entity when destory!");
         }
-        if (SceneLoadEndSubscription != null) {
-            SceneLoadEndSubscription.Dispose();
-        }
     }
 
     public void Initialize() {
-        if (!EntityInjected) {
+        if (!_entityInjected) {
             if (Context == null) {
                 throw new InvalidOperationException("Context must be defined.");
             }

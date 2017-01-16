@@ -19,13 +19,14 @@ public static class CoreComponentIds {
     public const int SceneLoadStartListener = 8;
     public const int SceneLoadStartMessage = 9;
     public const int Second = 10;
-    public const int Subsystems = 11;
-    public const int Tick = 12;
-    public const int TimeListener = 13;
-    public const int View = 14;
-    public const int ViewResources = 15;
+    public const int SpecialBall = 11;
+    public const int Subsystems = 12;
+    public const int Tick = 13;
+    public const int TimeListener = 14;
+    public const int View = 15;
+    public const int ViewResources = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "Ball",
@@ -39,6 +40,7 @@ public static class CoreComponentIds {
         "SceneLoadStartListener",
         "SceneLoadStartMessage",
         "Second",
+        "SpecialBall",
         "Subsystems",
         "Tick",
         "TimeListener",
@@ -58,6 +60,7 @@ public static class CoreComponentIds {
         typeof(SceneLoadStartListener),
         typeof(SceneLoadStartMessageComponent),
         typeof(Second),
+        typeof(SpecialBall),
         typeof(Subsystems),
         typeof(Tick),
         typeof(TimeListener),

@@ -36,7 +36,7 @@ public class Second : IComponent {
 [Core]
 public class ViewResources : IComponent {
     #region Fields
-    public GameObject Value;
+    public GameObject GameObject;
     #endregion
 }
 

@@ -7,12 +7,15 @@
 
 using Entitas;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 public class BallEntityBehaviour : EntityBehaviour, IHandle<BecomeBiggerEvent> {
     #region Fields
     public int LifePoint;
     public string BallName;
     public Animator Anim;
+    public bool IsSpecialBall;
     #endregion
 
     #region Properties
@@ -25,6 +28,7 @@ public class BallEntityBehaviour : EntityBehaviour, IHandle<BecomeBiggerEvent> {
         Entity.AddBall(BallName);
         Entity.AddHP(LifePoint);
         Entity.AddView(gameObject);
+        Entity.IsSpecialBall(IsSpecialBall);
     }
 
     public override void AfterInitialized() {

@@ -20,3 +20,7 @@ public class HP : IComponent {
     public int Point;
     #endregion
 }
+
+[Core]
+public class SpecialBall : IComponent {
+}

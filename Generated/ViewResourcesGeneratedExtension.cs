@@ -15,15 +15,15 @@ namespace Entitas {
         public ViewResources viewResources { get { return (ViewResources)GetComponent(CoreComponentIds.ViewResources); } }
         public bool hasViewResources { get { return HasComponent(CoreComponentIds.ViewResources); } }
 
-        public Entity AddViewResources(UnityEngine.GameObject newValue) {
+        public Entity AddViewResources(UnityEngine.GameObject newGameObject) {
             var component = CreateComponent<ViewResources>(CoreComponentIds.ViewResources);
-            component.Value = newValue;
+            component.GameObject = newGameObject;
             return AddComponent(CoreComponentIds.ViewResources, component);
         }
 
-        public Entity ReplaceViewResources(UnityEngine.GameObject newValue) {
+        public Entity ReplaceViewResources(UnityEngine.GameObject newGameObject) {
             var component = CreateComponent<ViewResources>(CoreComponentIds.ViewResources);
-            component.Value = newValue;
+            component.GameObject = newGameObject;
             ReplaceComponent(CoreComponentIds.ViewResources, component);
             return this;
         }

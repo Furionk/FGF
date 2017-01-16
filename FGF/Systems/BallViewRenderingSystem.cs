@@ -31,13 +31,9 @@ public class BallViewRenderingSystem : ReactiveSystem {
 
     protected override void Execute(List<Entity> entities) {
         foreach (var entity in entities) {
-            if (!entity.hasView) {
-                var go = Object.Instantiate(entity.viewResources.Value);
-                go.GetComponent<BallEntityBehaviour>().Inject(ctx, entity);
-                //go.GetComponent<BallEntityBehaviour>().Entity.AddBecomeBiggerEventListener(go.GetComponent<BallEntityBehaviour>());
-                go.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(0, 5));
-                entity.AddView(go);
-            }
+            var go = entity.InstantiateViewAndInject<BallEntityBehaviour>(Contexts.sharedInstance.core);
+            go.transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(0, 5));
+            entity.AddView(go);
         }
     }
 }
