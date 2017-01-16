@@ -34,7 +34,6 @@ public class BallExplodeSystem : ReactiveSystem {
         foreach (var entity in entities) {
             if (entity.hP.Point <= 0) {
                 Object.Destroy(entity.view.Value.gameObject);
-                ctx.DestroyEntity(entity);
             }
         }
     }

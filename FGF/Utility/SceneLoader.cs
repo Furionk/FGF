@@ -5,6 +5,7 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
+using System;
 using System.Collections;
 using Entitas;
 using UnityEngine;
@@ -13,35 +14,47 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour {
     private IEnumerator LoadScene() {
         var ctx = Contexts.sharedInstance.core;
+        var currentSceneName = SceneManager.GetActiveScene().name;
 
         // before scene loaded
         foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadStartListener).GetEntities()) {
             entity.sceneLoadStartListener.Notify(new SceneLoadStartMessage());
         }
-        if (!string.IsNullOrEmpty(ctx.sceneConfig.TargetScene)) {
-            var async = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
-            while (!async.isDone) {
-                //Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
 
+
+        if (!string.IsNullOrEmpty(ctx.sceneConfig.TargetScene)) {
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
+            while (!loadOperation.isDone) {
+                //Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
                 foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
                     entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage {
-                        Progress = async.progress
+                        Type = SceneLoadProgressMessage.SceneLoadProgressType.UnityScenePart,
+                        Progress = loadOperation.progress
                     });
                 }
                 yield return new WaitForEndOfFrame();
             }
         }
 
+
+
         // after scene loaded
         EntityBehaviour[] entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
+        float eneitaLoading = 0;
+        float entitaLoadingCount = entityEntityBehaviours.Length;
 
         // run subsystems
-        var subsystems = ctx.sceneConfig.SceneMapping(ctx.sceneConfig.CurrentSceneType);
-        Bootstrapper.Instance.CurrentSceneType = ctx.sceneConfig.CurrentSceneType;
-        Bootstrapper.Instance.UpdateSubsystems(subsystems);
+        Bootstrapper.Instance.UpdateSubsystems(ctx.sceneConfig.CurrentSceneType, ctx.sceneConfig.SceneMapping(ctx.sceneConfig.CurrentSceneType));
 
         foreach (var entityEntityBehaviour in entityEntityBehaviours) {
             entityEntityBehaviour.Initialize();
+            eneitaLoading++;
+            foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
+                entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage {
+                    Type = SceneLoadProgressMessage.SceneLoadProgressType.EntitasPart,
+                    Progress = eneitaLoading / entitaLoadingCount
+                });
+            }
         }
 
         foreach (var entityEntityBehaviour in entityEntityBehaviours) {

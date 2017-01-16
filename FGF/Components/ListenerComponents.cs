@@ -13,7 +13,14 @@ public class SceneLoadProgressListener : Listener<SceneLoadProgressMessage>, ICo
 
 [Core]
 public class SceneLoadProgressMessage {
+
+    public enum SceneLoadProgressType {
+        UnityScenePart,
+        EntitasPart
+    }
+
     #region Fields
+    public SceneLoadProgressType Type;
     public float Progress;
     #endregion
 }

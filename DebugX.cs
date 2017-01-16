@@ -11,11 +11,11 @@ public class DebugX : EntityBehaviour
     protected override Context Context {
         get { return Contexts.sharedInstance.core; }
     }
-    //public override void Setup() {
-    //    Entity.AddSceneLoadStartListener(this);
-    //    Entity.AddSceneLoadProgressListener(this);
-    //    Entity.AddSceneLoadEndListener(this);
-    //}
+    public override void Setup() {
+        Entity.AddSceneLoadStartListener(this);
+        Entity.AddSceneLoadProgressListener(this);
+        Entity.AddSceneLoadEndListener(this);
+    }
 
     public void Handle(SceneLoadEndMessage argument) {
         Debug.Log("E");
