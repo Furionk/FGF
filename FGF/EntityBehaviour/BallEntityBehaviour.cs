@@ -14,7 +14,7 @@ public class BallEntityBehaviour : EntityBehaviour {
     #endregion
 
     #region Properties
-    public override Context Context {
+    protected override Context Context {
         get { return Contexts.sharedInstance.core; }
     }
     #endregion

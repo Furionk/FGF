@@ -19,8 +19,8 @@ public class SceneManagementSystem : ReactiveSystem {
     #endregion
 
     #region Fields
-    private Context CTX;
     private readonly SceneLoader _sceneLoader;
+    private Context CTX;
     #endregion
 
     public SceneManagementSystem(Context context, SceneLoader sceneLoader) : base(context) {
@@ -48,16 +48,12 @@ public class SceneManagementSystem : ReactiveSystem {
     }
 
     protected override void Execute(List<Entity> entities) {
-        // execute Coroutine logic in a monobehaviour
+        // async execute loadscene from scene loader
         _sceneLoader.StartCoroutine("LoadScene");
 
-        ////// run subsystems
-        ////      var subsystems = CTX.sceneConfig.SceneMapping(CTX.sceneConfig.CurrentSceneType);
-        ////      Bootstrapper.Instance.CurrentSceneType = CTX.sceneConfig.CurrentSceneType;
-        ////      Bootstrapper.Instance.UpdateSubsystems(subsystems);
+        // any non-breakable scene change logic here, BGM change...
         ////      // custom scene change logic
         ////      PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
-        ////Debug.Log("Subsystems for: " + CTX.sceneConfig.CurrentSceneType + " has been loaded.");
     }
 
     #region implemented abstract members of ReactiveSystem

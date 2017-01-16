@@ -12,15 +12,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour {
     private IEnumerator LoadScene() {
-        //AsyncOperation async = UnityEngine.SceneManagement.SceneManager.UnloadScene(pPool.sceneConfig.TargetScene);
         var ctx = Contexts.sharedInstance.core;
+
+        // before scene loaded
         foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadStartListener).GetEntities()) {
             entity.sceneLoadStartListener.Notify(new SceneLoadStartMessage());
         }
         if (!string.IsNullOrEmpty(ctx.sceneConfig.TargetScene)) {
             var async = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
             while (!async.isDone) {
-                Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
+                //Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
+
                 foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
                     entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage {
                         Progress = async.progress
@@ -30,22 +32,26 @@ public class SceneLoader : MonoBehaviour {
             }
         }
 
+        // after scene loaded
+        EntityBehaviour[] entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
+
         // run subsystems
         var subsystems = ctx.sceneConfig.SceneMapping(ctx.sceneConfig.CurrentSceneType);
         Bootstrapper.Instance.CurrentSceneType = ctx.sceneConfig.CurrentSceneType;
         Bootstrapper.Instance.UpdateSubsystems(subsystems);
 
-        // can be optimize
-        EntityBehaviour[] entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
         foreach (var entityEntityBehaviour in entityEntityBehaviours) {
             entityEntityBehaviour.Initialize();
         }
 
+        foreach (var entityEntityBehaviour in entityEntityBehaviours) {
+            entityEntityBehaviour.AfterInitialized();
+        }
 
-        //Bootstrapper.EventAggregator.Publish(new SceneLoadEndMessage());
         foreach (var entity in ctx.GetGroup(CoreMatcher.SceneLoadEndListener).GetEntities()) {
             entity.sceneLoadEndListener.Notify(new SceneLoadEndMessage());
         }
-        Debug.Log("Subsystems for: " + ctx.sceneConfig.CurrentSceneType + " has been loaded.");
+
+        //Debug.Log("Subsystems for: " + ctx.sceneConfig.CurrentSceneType + " has been loaded.");
     }
 }

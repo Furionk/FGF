@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public class DebugX : MonoBehaviour {
-    private List<Entity> @group = new List<Entity>();
+public class DebugX : EntityBehaviour
+    , IHandle<SceneLoadEndMessage>
+    , IHandle<SceneLoadProgressMessage>
+    , IHandle<SceneLoadStartMessage> {
 
-    public void Start() {
+    protected override Context Context {
+        get { return Contexts.sharedInstance.core; }
+    }
+    //public override void Setup() {
+    //    Entity.AddSceneLoadStartListener(this);
+    //    Entity.AddSceneLoadProgressListener(this);
+    //    Entity.AddSceneLoadEndListener(this);
+    //}
 
-        //Invoke("Create", 0);
-
+    public void Handle(SceneLoadEndMessage argument) {
+        Debug.Log("E");
     }
 
-    //void Create() {
-    //    @group.Clear();
-    //    for (int i = 0; i < 5000; i++) {
-    //        group.Add(Contexts.sharedInstance.core.CreateEntity());
-    //    }
-    //    Invoke("Remove", 1);
-    //}
+    public void Handle(SceneLoadProgressMessage argument) {
+        Debug.Log("P");
+    }
 
-    //void Remove() {
-    //    foreach (var entity in group) {
-    //        Contexts.sharedInstance.core.DestroyEntity(entity);
-    //    }
-    //    Invoke("Create", 1);
-    //}
-
+    public void Handle(SceneLoadStartMessage argument) {
+        Debug.Log("S");
+    }
 }
