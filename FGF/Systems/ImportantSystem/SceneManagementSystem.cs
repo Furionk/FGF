@@ -6,9 +6,7 @@
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using System.Collections.Generic;
-using System.Linq;
 using Entitas;
-using UnityEngine;
 
 /// <summary>
 ///     separate which scene type using different sort of subsystem

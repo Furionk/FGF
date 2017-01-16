@@ -5,7 +5,6 @@
 // By: Furion
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
-using System;
 using System.Collections;
 using Entitas;
 using UnityEngine;
@@ -20,10 +19,8 @@ public class SceneLoader : MonoBehaviour {
         foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadStartListener).GetEntities()) {
             entity.sceneLoadStartListener.Notify(new SceneLoadStartMessage());
         }
-
-
         if (!string.IsNullOrEmpty(ctx.sceneConfig.TargetScene)) {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
+            var loadOperation = SceneManager.LoadSceneAsync(ctx.sceneConfig.TargetScene);
             while (!loadOperation.isDone) {
                 //Debug.Log("Loading Scene" + ctx.sceneConfig.TargetScene + ":" + async.progress);
                 foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
@@ -36,31 +33,26 @@ public class SceneLoader : MonoBehaviour {
             }
         }
 
-
-
         // after scene loaded
-        EntityBehaviour[] entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
+        var entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
         float eneitaLoading = 0;
         float entitaLoadingCount = entityEntityBehaviours.Length;
 
         // run subsystems
         Bootstrapper.Instance.UpdateSubsystems(ctx.sceneConfig.CurrentSceneType, ctx.sceneConfig.SceneMapping(ctx.sceneConfig.CurrentSceneType));
-
         foreach (var entityEntityBehaviour in entityEntityBehaviours) {
             entityEntityBehaviour.Initialize();
             eneitaLoading++;
             foreach (var entity in Contexts.sharedInstance.core.GetGroup(CoreMatcher.SceneLoadProgressListener).GetEntities()) {
                 entity.sceneLoadProgressListener.Notify(new SceneLoadProgressMessage {
                     Type = SceneLoadProgressMessage.SceneLoadProgressType.EntitasPart,
-                    Progress = eneitaLoading / entitaLoadingCount
+                    Progress = eneitaLoading/entitaLoadingCount
                 });
             }
         }
-
         foreach (var entityEntityBehaviour in entityEntityBehaviours) {
             entityEntityBehaviour.AfterInitialized();
         }
-
         foreach (var entity in ctx.GetGroup(CoreMatcher.SceneLoadEndListener).GetEntities()) {
             entity.sceneLoadEndListener.Notify(new SceneLoadEndMessage());
         }

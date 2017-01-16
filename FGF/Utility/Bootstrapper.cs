@@ -32,7 +32,6 @@ public class Bootstrapper : MonoBehaviour {
 
     public void UpdateSubsystems(SceneConfig.SceneType currentSceneType, Systems subSystems) {
         CurrentSceneType = currentSceneType;
-
         if (_subSystems != null) {
             _subSystems.DeactivateReactiveSystems();
             _subSystems.ClearReactiveSystems();

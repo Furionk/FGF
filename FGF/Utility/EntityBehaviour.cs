@@ -28,20 +28,9 @@ public abstract class EntityBehaviour : MonoBehaviour {
     private IDisposable SceneLoadEndSubscription { get; set; }
     #endregion
 
-    public void Initialize() {
-        if (!EntityInjected) {
-            if (Context == null) {
-                throw new InvalidOperationException("Context must be defined.");
-            }
-            Entity = Context.CreateEntity();
-            Setup();
-        }
-    }
-
     /// <summary>
     ///     implmenet entita initialization required logic in here.
     ///     AND also listener logic
-    ///         
     /// </summary>
     public virtual void AfterInitialized() {
     }
@@ -72,6 +61,16 @@ public abstract class EntityBehaviour : MonoBehaviour {
         }
         if (SceneLoadEndSubscription != null) {
             SceneLoadEndSubscription.Dispose();
+        }
+    }
+
+    public void Initialize() {
+        if (!EntityInjected) {
+            if (Context == null) {
+                throw new InvalidOperationException("Context must be defined.");
+            }
+            Entity = Context.CreateEntity();
+            Setup();
         }
     }
 
