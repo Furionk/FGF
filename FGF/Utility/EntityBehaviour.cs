@@ -28,15 +28,13 @@ public class EntityBehaviour : MonoBehaviour {
     private IDisposable SceneLoadEndSubscription { get; set; }
     #endregion
 
-    public virtual void Awake() {
-        SceneLoadEndSubscription = OnEvent<SceneLoadEndMessage>()
-            .Subscribe(msg => {
-                if (!EntityInjected) {
-                    Entity = Context.CreateEntity();
-                    Setup();
-                }
-            });
+    public virtual void Initialize() {
+        if (!EntityInjected) {
+            Entity = Context.CreateEntity();
+            Setup();
+        }
     }
+
 
     /// <summary>
     ///     implmenet your entity initialize logic in here if this entity is create from scene.

@@ -34,7 +34,15 @@ public class SceneLoader : MonoBehaviour {
         var subsystems = ctx.sceneConfig.SceneMapping(ctx.sceneConfig.CurrentSceneType);
         Bootstrapper.Instance.CurrentSceneType = ctx.sceneConfig.CurrentSceneType;
         Bootstrapper.Instance.UpdateSubsystems(subsystems);
-        Bootstrapper.EventAggregator.Publish(new SceneLoadEndMessage());
+
+        // can be optimize
+        EntityBehaviour[] entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
+        foreach (var entityEntityBehaviour in entityEntityBehaviours) {
+            entityEntityBehaviour.Initialize();
+        }
+
+
+        //Bootstrapper.EventAggregator.Publish(new SceneLoadEndMessage());
         foreach (var entity in ctx.GetGroup(CoreMatcher.SceneLoadEndListener).GetEntities()) {
             entity.sceneLoadEndListener.Notify(new SceneLoadEndMessage());
         }
