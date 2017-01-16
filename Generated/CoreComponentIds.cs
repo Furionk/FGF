@@ -9,25 +9,27 @@
 public static class CoreComponentIds {
 
     public const int Ball = 0;
-    public const int HP = 1;
-    public const int SceneConfig = 2;
-    public const int SceneLoadEndListener = 3;
-    public const int SceneLoadEndMessage = 4;
-    public const int SceneLoadProgressListener = 5;
-    public const int SceneLoadProgressMessage = 6;
-    public const int SceneLoadStartListener = 7;
-    public const int SceneLoadStartMessage = 8;
-    public const int Second = 9;
-    public const int Subsystems = 10;
-    public const int Tick = 11;
-    public const int TimeListener = 12;
-    public const int View = 13;
-    public const int ViewResources = 14;
+    public const int BecomeBiggerEventListener = 1;
+    public const int HP = 2;
+    public const int SceneConfig = 3;
+    public const int SceneLoadEndListener = 4;
+    public const int SceneLoadEndMessage = 5;
+    public const int SceneLoadProgressListener = 6;
+    public const int SceneLoadProgressMessage = 7;
+    public const int SceneLoadStartListener = 8;
+    public const int SceneLoadStartMessage = 9;
+    public const int Second = 10;
+    public const int Subsystems = 11;
+    public const int Tick = 12;
+    public const int TimeListener = 13;
+    public const int View = 14;
+    public const int ViewResources = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "Ball",
+        "BecomeBiggerEventListener",
         "HP",
         "SceneConfig",
         "SceneLoadEndListener",
@@ -46,6 +48,7 @@ public static class CoreComponentIds {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Ball),
+        typeof(BecomeBiggerEventListener),
         typeof(HP),
         typeof(SceneConfig),
         typeof(SceneLoadEndListener),

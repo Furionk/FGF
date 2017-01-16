@@ -6,11 +6,13 @@
 // Last Pinned Datetime: 2017 / 01 / 15 - 16:46
 
 using Entitas;
+using UnityEngine;
 
-public class BallEntityBehaviour : EntityBehaviour {
+public class BallEntityBehaviour : EntityBehaviour, IHandle<BecomeBiggerEvent> {
     #region Fields
     public int LifePoint;
     public string BallName;
+    public Animator Anim;
     #endregion
 
     #region Properties
@@ -25,7 +27,15 @@ public class BallEntityBehaviour : EntityBehaviour {
         Entity.AddView(gameObject);
     }
 
+    public override void AfterInitialized() {
+        Entity.AddBecomeBiggerEventListener(this);
+    }
+
     private void OnMouseDown() {
         Entity.ReplaceHP(Entity.hP.Point - 5);
+    }
+
+    public void Handle(BecomeBiggerEvent argument) {
+        Anim.SetTrigger("BIGGER");
     }
 }

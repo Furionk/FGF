@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class InitSystem : IInitializeSystem {
     public void Initialize() {
+        // set all single entity default value here
         Debug.Log("Init system finished");
     }
 }

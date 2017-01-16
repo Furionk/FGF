@@ -40,6 +40,8 @@ public abstract class EntityBehaviour : MonoBehaviour {
 
     /// <summary>
     ///     implmenet entita initialization required logic in here.
+    ///     AND also listener logic
+    ///         
     /// </summary>
     public virtual void AfterInitialized() {
     }
@@ -59,6 +61,7 @@ public abstract class EntityBehaviour : MonoBehaviour {
         EntityInjected = true;
         Context = ctx;
         Entity = e;
+        AfterInitialized();
     }
 
     public virtual void OnDestroy() {

@@ -61,14 +61,4 @@ public class SceneManagementSystem : ReactiveSystem {
         return true;
     }
     #endregion
-
-    private void PlaySceneBGM(SceneConfig.SceneType sceneType) {
-        var bgmdata = Resources.LoadAll<BGMData>(AppConstants.ScriptableObjectDataFolder).SingleOrDefault(o => o.SceneType == sceneType);
-        if (bgmdata == null) {
-            // you can have your own bgm management setting or no bgm
-            Debug.Log("Cannot find bgm data for the corrsponding scene!");
-        } else {
-            SoundManager.Instance.PlayBGM(bgmdata);
-        }
-    }
 }

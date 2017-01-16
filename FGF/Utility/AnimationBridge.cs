@@ -8,8 +8,10 @@
 using UnityEngine;
 
 public class AnimationBridge : MonoBehaviour {
+    // Mecanim event bridge
     public void BridgeEvent(string eventName) {
-        if (eventName == "KillAnimationFinished") {
+        if (eventName == "") {
+            // ...
         }
     }
 }
