@@ -42,6 +42,6 @@
 </li>
 <li>
 <h2>Entity Behaviour</h2>
-<br />多用途的Monobehaviour，用於將Game Object的Entity作初始化用途，支援預先創造及運行時創造</li>
+<br />多用途的Monobehaviour，用於將Game Object的Entity作初始化用途以及接收事件，支援預先創造及運行時創造，類似MVVM中View的存在。</li>
 </ul>
 <p>&nbsp;</p>
