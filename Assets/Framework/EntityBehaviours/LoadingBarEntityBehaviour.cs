@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine.UI;
 
-public class LoadingBarEntityBehaviour : EntityBehaviour,
+public class LoadingBarEntityBehaviour : CustomEntityBehaviour,
                                          IHandle<SceneLoadStartMessage>,
                                          IHandle<SceneLoadProgressMessage> {
     #region Fields

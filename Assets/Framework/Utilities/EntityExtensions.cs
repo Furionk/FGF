@@ -15,7 +15,7 @@ public static class EntityExtensions {
             throw new InvalidOperationException("Entity has no view resources");
         }
         GameObject newGameObject = Object.Instantiate(entity.viewResources.GameObject);
-        foreach(EntityBehaviour entityBehaviour in newGameObject.GetComponents<EntityBehaviour>()) {
+        foreach(CustomEntityBehaviour entityBehaviour in newGameObject.GetComponents<CustomEntityBehaviour>()) {
             entityBehaviour.Inject(ctx, entity);
         }
         entity.AddView(newGameObject);

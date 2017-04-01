@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
-public class BallEntityBehaviour : EntityBehaviour, IHandle<BecomeBiggerEvent> {
+public class BallEntityBehaviour : CustomEntityBehaviour, IHandle<BecomeBiggerEvent> {
     #region Fields
     public int LifePoint;
     public string BallName;

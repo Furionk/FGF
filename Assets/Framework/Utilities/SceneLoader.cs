@@ -34,7 +34,7 @@ public class SceneLoader : MonoBehaviour {
         }
 
         // after scene loaded
-        var entityEntityBehaviours = FindObjectsOfType<EntityBehaviour>();
+        var entityEntityBehaviours = FindObjectsOfType<CustomEntityBehaviour>();
         float eneitaLoading = 0;
         float entitaLoadingCount = entityEntityBehaviours.Length;
 

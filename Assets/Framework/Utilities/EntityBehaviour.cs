@@ -14,7 +14,7 @@ using UnityEngine;
 ///     EntityBehaviour is for game object which already in a Scene and it needs Entitas feature.
 ///     for real time entity creation, a 'view' is good enough to connect scene and entity
 /// </summary>
-public abstract class EntityBehaviour : MonoBehaviour {
+public abstract class CustomEntityBehaviour : MonoBehaviour {
     #region Fields
     private bool _entityInjected;
     #endregion
@@ -40,6 +40,7 @@ public abstract class EntityBehaviour : MonoBehaviour {
     /// <param name="e"></param>
     public virtual void Setup() {
     }
+
 
     /// <summary>
     ///     call it if you already created an entity from system.

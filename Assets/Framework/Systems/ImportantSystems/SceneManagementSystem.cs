@@ -49,6 +49,7 @@ public class SceneManagementSystem : ReactiveSystem {
         // async execute loadscene from scene loader
         _sceneLoader.StartCoroutine("LoadScene");
 
+
         // any non-breakable scene change logic here, BGM change...
         ////      // custom scene change logic
         ////      PlaySceneBGM(CTX.sceneConfig.CurrentSceneType);
