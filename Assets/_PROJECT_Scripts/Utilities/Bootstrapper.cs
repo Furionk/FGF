@@ -47,6 +47,7 @@ public class Bootstrapper : MonoBehaviour {
     }
 
     public void Awake() {
+        Instance = this;
         _contexts = Contexts.sharedInstance;
         _contexts.SetAllContexts();
         // first run constructor
