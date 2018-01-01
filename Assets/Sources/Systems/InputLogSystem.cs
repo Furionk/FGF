@@ -8,7 +8,7 @@ public class InputLogSystem : ReactiveSystem<InputEntity>, ICleanupSystem {
 
     private IGroup<InputEntity> _gOnMouseDown;
 
-    public InputLogSystem(IContext<InputEntity> context) : base(context) {
+    public InputLogSystem(InputContext context) : base(context) {
         _gOnMouseDown = context.GetGroup(InputMatcher.OnMouseDown);
     }
 

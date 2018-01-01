@@ -6,7 +6,7 @@ using Zenject;
 
 public class ViewCreationSystem : ReactiveSystem<GameEntity> {
 
-    public ViewCreationSystem(IContext<GameEntity> context) : base(context) {
+    public ViewCreationSystem(GameContext context) : base(context) {
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {

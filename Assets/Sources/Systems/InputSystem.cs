@@ -7,7 +7,7 @@ public class InputSystem : IExecuteSystem {
 
     private IContext<InputEntity> _inputContext;
 
-    public InputSystem(IContext<InputEntity> inputContext) {
+    public InputSystem(InputContext inputContext) {
         _inputContext = inputContext;
     }
 

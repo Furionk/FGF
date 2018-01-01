@@ -10,7 +10,7 @@ public class SceneManagementSystem : ReactiveSystem<GameEntity>{
     private SceneLoadUtility _sceneLoadUtility;
     private IGroup<GameEntity> _gSceneLoad;
 
-    public SceneManagementSystem(IContext<GameEntity> gameContext, SceneLoadUtility sceneLoadUtility) : base(gameContext) {
+    public SceneManagementSystem(GameContext gameContext, SceneLoadUtility sceneLoadUtility) : base(gameContext) {
         _gSceneLoad = gameContext.GetGroup(GameMatcher.OnSceneLoad);
         _sceneLoadUtility = sceneLoadUtility;
     }

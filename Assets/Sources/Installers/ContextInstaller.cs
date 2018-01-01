@@ -8,9 +8,9 @@ public class ContextInstaller : MonoInstaller<ContextInstaller> {
     public override void InstallBindings() {
 
         // Contexts
-        Container.Bind<IContext<GameEntity>>()
+        Container.Bind<GameContext>()
             .FromInstance(Contexts.sharedInstance.game);
-        Container.Bind<IContext<InputEntity>>()
+        Container.Bind<InputContext>()
             .FromInstance(Contexts.sharedInstance.input);
 
         // Systems

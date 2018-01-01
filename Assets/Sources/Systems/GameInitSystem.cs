@@ -6,7 +6,7 @@ using Zenject;
 public class GameInitSystem : IInitializeSystem { 
 
     [Inject]
-    public IContext<GameEntity> game;
+    public GameContext game;
 
 
     public void Initialize() {

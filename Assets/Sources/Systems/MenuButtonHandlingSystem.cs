@@ -10,8 +10,8 @@ public class MenuButtonHandlingSystem : ReactiveSystem<InputEntity>, ICleanupSys
     private IContext<GameEntity> _gameContext;
     private IContext<InputEntity> _inputContext;
 
-    public MenuButtonHandlingSystem(IContext<InputEntity> context, IContext<GameEntity> gameContext, IContext<InputEntity> inputContext) : base(context) {
-        _inputContext = inputContext;
+    public MenuButtonHandlingSystem(InputContext context, GameContext gameContext) : base(context) {
+        _inputContext = context;
         _gameContext = gameContext;
         _gOnMenuButtonDown = context.GetGroup(InputMatcher.OnMenuButtonDown);
     }
