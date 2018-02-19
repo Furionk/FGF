@@ -1,33 +1,50 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// FGF - FGF - SceneManagementSystem.cs
+// Created at: 2018 01 01 下午 03:28
+// Updated At: 2018 02 19 下午 05:40
+// By: Furion Mashiou
+
 using System.Collections.Generic;
 using Entitas;
-using UnityEngine.SceneManagement;
-using Zenject;
 
-public class SceneManagementSystem : ReactiveSystem<GameEntity>{ 
+namespace FGF.System {
 
-    private SceneLoadUtility _sceneLoadUtility;
-    private IGroup<GameEntity> _gSceneLoad;
+    public class SceneManagementSystem : ReactiveSystem<GameEntity> {
 
-    public SceneManagementSystem(GameContext gameContext, SceneLoadUtility sceneLoadUtility) : base(gameContext) {
-        _gSceneLoad = gameContext.GetGroup(GameMatcher.OnSceneLoad);
-        _sceneLoadUtility = sceneLoadUtility;
-    }
+        #region Fields
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-        return context.CreateCollector(GameMatcher.OnSceneLoad);
-    }
+        private SceneLoadUtility _sceneLoadUtility;
+        private IGroup<GameEntity> _gSceneLoad;
 
-    protected override bool Filter(GameEntity entity) {
-        return true;
-    }
+        #endregion
 
-    protected override void Execute(List<GameEntity> entities) {
-        foreach (var entity in entities) {
-            _sceneLoadUtility.LoadScene(entity.onSceneLoad.nextSceneName);
-            entity.Destroy();
+        #region Constructor
+
+        public SceneManagementSystem(GameContext gameContext, SceneLoadUtility sceneLoadUtility) : base(gameContext) {
+            _gSceneLoad = gameContext.GetGroup(GameMatcher.OnSceneLoad);
+            _sceneLoadUtility = sceneLoadUtility;
         }
+
+        #endregion
+
+        #region Methods
+
+        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
+            return context.CreateCollector(GameMatcher.OnSceneLoad);
+        }
+
+        protected override bool Filter(GameEntity entity) {
+            return true;
+        }
+
+        protected override void Execute(List<GameEntity> entities) {
+            foreach (var entity in entities) {
+                _sceneLoadUtility.LoadScene(entity.onSceneLoad.nextSceneName);
+                entity.Destroy();
+            }
+        }
+
+        #endregion
+
     }
 
 }

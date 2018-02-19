@@ -8,19 +8,22 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int OnSceneLoad = 0;
-    public const int Resources = 1;
-    public const int View = 2;
+    public const int Id = 0;
+    public const int OnSceneLoad = 1;
+    public const int Resources = 2;
+    public const int View = 3;
 
-    public const int TotalComponents = 3;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
+        "Id",
         "OnSceneLoad",
         "Resources",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(IdComponent),
         typeof(OnSceneLoadComponent),
         typeof(ResourcesComponent),
         typeof(ViewComponent)

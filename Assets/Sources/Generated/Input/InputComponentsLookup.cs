@@ -8,14 +8,16 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int OnMenuButtonDown = 0;
-    public const int OnMouseDown = 1;
-    public const int Resources = 2;
-    public const int View = 3;
+    public const int Id = 0;
+    public const int OnMenuButtonDown = 1;
+    public const int OnMouseDown = 2;
+    public const int Resources = 3;
+    public const int View = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
+        "Id",
         "OnMenuButtonDown",
         "OnMouseDown",
         "Resources",
@@ -23,6 +25,7 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(IdComponent),
         typeof(OnMenuButtonDownComponent),
         typeof(OnMouseDownComponent),
         typeof(ResourcesComponent),

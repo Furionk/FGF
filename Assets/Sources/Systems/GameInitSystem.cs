@@ -1,15 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// FGF - FGF - GameInitSystem.cs
+// Created at: 2018 01 01 下午 03:28
+// Updated At: 2018 02 19 下午 05:40
+// By: Furion Mashiou
+
 using Entitas;
 using Zenject;
 
-public class GameInitSystem : IInitializeSystem { 
+namespace FGF.System {
 
-    [Inject]
-    public GameContext game;
+    public class GameInitSystem : IInitializeSystem {
 
+        #region Fields
 
-    public void Initialize() {
+        [Inject]
+        public GameContext game;
+
+        #endregion
+
+        #region Methods
+
+        public void Initialize() {
+        }
+
+        #endregion
 
     }
 

@@ -1,46 +1,63 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// FGF - FGF - MenuButtonHandlingSystem.cs
+// Created at: 2018 01 01 下午 03:28
+// Updated At: 2018 02 19 下午 05:40
+// By: Furion Mashiou
+
 using System.Collections.Generic;
 using Entitas;
-using Zenject;
+using UnityEngine;
 
-public class MenuButtonHandlingSystem : ReactiveSystem<InputEntity>, ICleanupSystem {
+namespace FGF.System {
 
-    private IGroup<InputEntity> _gOnMenuButtonDown;
-    private IContext<GameEntity> _gameContext;
-    private IContext<InputEntity> _inputContext;
+    public class MenuButtonHandlingSystem : ReactiveSystem<InputEntity>, ICleanupSystem {
 
-    public MenuButtonHandlingSystem(InputContext context, GameContext gameContext) : base(context) {
-        _inputContext = context;
-        _gameContext = gameContext;
-        _gOnMenuButtonDown = context.GetGroup(InputMatcher.OnMenuButtonDown);
-    }
+        #region Fields
 
-    protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
-        return context.CreateCollector(InputMatcher.OnMenuButtonDown);
-    }
+        private IGroup<InputEntity> _gOnMenuButtonDown;
+        private IContext<GameEntity> _gameContext;
+        private IContext<InputEntity> _inputContext;
 
-    protected override bool Filter(InputEntity entity) {
-        return true;
-    }
+        #endregion
 
-    protected override void Execute(List<InputEntity> entities) {
-        foreach (var inputEntity in entities) {
-            Debug.Log(inputEntity.onMenuButtonDown.buttonId);
-            if (inputEntity.onMenuButtonDown.buttonId == "NEXT") {
-                _gameContext.CreateEntity()
-                    .AddOnSceneLoad("Game");
-            } else if (inputEntity.onMenuButtonDown.buttonId == "BACK") {
-                _gameContext.CreateEntity()
-                    .AddOnSceneLoad("Menu");
+        #region Constructor
+
+        public MenuButtonHandlingSystem(InputContext context, GameContext gameContext) : base(context) {
+            _inputContext = context;
+            _gameContext = gameContext;
+            _gOnMenuButtonDown = context.GetGroup(InputMatcher.OnMenuButtonDown);
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context) {
+            return context.CreateCollector(InputMatcher.OnMenuButtonDown);
+        }
+
+        protected override bool Filter(InputEntity entity) {
+            return true;
+        }
+
+        protected override void Execute(List<InputEntity> entities) {
+            foreach (var inputEntity in entities) {
+                Debug.Log(inputEntity.onMenuButtonDown.buttonId);
+                if (inputEntity.onMenuButtonDown.buttonId == "NEXT") {
+                    _gameContext.CreateEntity().AddOnSceneLoad("Game");
+                } else if (inputEntity.onMenuButtonDown.buttonId == "BACK") {
+                    _gameContext.CreateEntity().AddOnSceneLoad("Menu");
+                }
             }
         }
-    }
 
-    public void Cleanup() {
-        foreach (var entity in _gOnMenuButtonDown.GetEntities()) {
-            entity.Destroy();
+        public void Cleanup() {
+            foreach (var entity in _gOnMenuButtonDown.GetEntities()) {
+                entity.Destroy();
+            }
         }
+
+        #endregion
+
     }
 
 }
