@@ -3,6 +3,7 @@
 // Updated At: 2018 02 19 下午 05:45
 // By: Furion Mashiou
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Entitas;
@@ -14,31 +15,29 @@ public class GameController : MonoBehaviour {
     #region Fields
 
     [Inject]
-    public List<Feature> features;
+    private DiContainer _container;
     private Systems _systems;
-    public static GameObject Instance;
+    public static GameController Instance;
 
     #endregion
 
     #region Methods
 
     private void Awake() {
-        Instance = gameObject;
-    }
-
-    // Use this for initialization
-    private void Start() {
-        var ctxs = Contexts.sharedInstance;
-        foreach (var context in ctxs.allContexts) {
-            if (context.contextInfo.componentTypes.Contains(typeof(IdComponent))) {
-                context.OnEntityCreated += AddId;
-            }
-        }
+        Instance = this;
+        Contexts ctxs = Contexts.sharedInstance;
+        
         _systems = new Feature("Root Systems");
-        foreach (var feature in features) {
-            Debug.Log("[I] Feature Loaded: " + feature);
-            _systems.Add(feature);
+        // create entitas feature by nature
+        foreach (FeatureType.Natures nature in Enum.GetValues(typeof(FeatureType.Natures))) {
+            Feature newFeature = new Feature(nature.ToString());
+            foreach (var system in _container.ResolveIdAll<ISystem>(nature)) {
+                newFeature.Add(system);
+            }
+            _systems.Add(newFeature);
+            Debug.Log("Feature Loaded: " + newFeature.name);
         }
+
         _systems.Initialize();
     }
 

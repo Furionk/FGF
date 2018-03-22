@@ -1,6 +1,6 @@
 ﻿// FGF - FGF - MenuButtonHandlingSystem.cs
 // Created at: 2018 01 01 下午 03:28
-// Updated At: 2018 02 19 下午 05:40
+// Updated At: 2018 03 22 下午 11:09
 // By: Furion Mashiou
 
 using System.Collections.Generic;
@@ -9,12 +9,13 @@ using UnityEngine;
 
 namespace FGF.System {
 
+    [FeatureType(Nature = FeatureType.Natures.GameFlow)]
     public class MenuButtonHandlingSystem : ReactiveSystem<InputEntity>, ICleanupSystem {
 
         #region Fields
 
-        private IGroup<InputEntity> _gOnMenuButtonDown;
-        private IContext<GameEntity> _gameContext;
+        private IGroup<InputEntity>   _gOnMenuButtonDown;
+        private IContext<GameEntity>  _gameContext;
         private IContext<InputEntity> _inputContext;
 
         #endregion
@@ -22,8 +23,8 @@ namespace FGF.System {
         #region Constructor
 
         public MenuButtonHandlingSystem(InputContext context, GameContext gameContext) : base(context) {
-            _inputContext = context;
-            _gameContext = gameContext;
+            _inputContext      = context;
+            _gameContext       = gameContext;
             _gOnMenuButtonDown = context.GetGroup(InputMatcher.OnMenuButtonDown);
         }
 

@@ -1,6 +1,6 @@
 ﻿// FGF - FGF - InputSystem.cs
 // Created at: 2018 01 01 下午 03:28
-// Updated At: 2018 02 19 下午 05:40
+// Updated At: 2018 03 22 下午 11:09
 // By: Furion Mashiou
 
 using Entitas;
@@ -9,12 +9,13 @@ using Zenject;
 
 namespace FGF.System {
 
+    [FeatureType(Nature = FeatureType.Natures.Interaction)]
     public class InputSystem : IExecuteSystem {
 
         #region Fields
 
         private IContext<InputEntity> _inputContext;
-        private Transform TF;
+        private Transform             TF;
 
         #endregion
 

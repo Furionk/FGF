@@ -1,6 +1,6 @@
 ﻿// FGF - FGF - SceneManagementSystem.cs
 // Created at: 2018 01 01 下午 03:28
-// Updated At: 2018 02 19 下午 05:40
+// Updated At: 2018 03 22 下午 11:09
 // By: Furion Mashiou
 
 using System.Collections.Generic;
@@ -8,11 +8,12 @@ using Entitas;
 
 namespace FGF.System {
 
+    [FeatureType(Nature = FeatureType.Natures.GameFlow)]
     public class SceneManagementSystem : ReactiveSystem<GameEntity> {
 
         #region Fields
 
-        private SceneLoadUtility _sceneLoadUtility;
+        private SceneLoadUtility   _sceneLoadUtility;
         private IGroup<GameEntity> _gSceneLoad;
 
         #endregion
@@ -20,7 +21,7 @@ namespace FGF.System {
         #region Constructor
 
         public SceneManagementSystem(GameContext gameContext, SceneLoadUtility sceneLoadUtility) : base(gameContext) {
-            _gSceneLoad = gameContext.GetGroup(GameMatcher.OnSceneLoad);
+            _gSceneLoad       = gameContext.GetGroup(GameMatcher.OnSceneLoad);
             _sceneLoadUtility = sceneLoadUtility;
         }
 

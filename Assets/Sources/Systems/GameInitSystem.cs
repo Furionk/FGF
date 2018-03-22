@@ -8,6 +8,7 @@ using Zenject;
 
 namespace FGF.System {
 
+    [FeatureType(Nature = FeatureType.Natures.GameFlow)]
     public class GameInitSystem : IInitializeSystem {
 
         #region Fields
