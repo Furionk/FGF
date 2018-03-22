@@ -27,6 +27,9 @@
 	</ul>
 </li>
 <li><h2>Context Installer (Zenject)</h2>
-集中處理遊戲中的依賴性的地方，增加了 System 後在這裡進行登記即可在這些System裡使用 Dependency Injection
+集中處理遊戲中的依賴性的地方，在這裡登記一些常用的組件(e.g. Background Music, Network Manager)然後在各個system中透過Zenject進行Dependency Injection
+</li>
+<li><h2>{SceneType} Installer (Zenject)</h2>
+如果在場景更換時對Binding有所變動(e.g. 一些根據玩家行為的設定,動態的東西...)就在這裡重新Inject一次
 </li>
 </ul>
