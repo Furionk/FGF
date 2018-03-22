@@ -5,9 +5,8 @@ using System.Text;
 
 
 /// <summary>
-/// all system should belongs to one of the nature below
-/// developer may add custom nature to classify differnt types of system
-/// feature nature would be shown as Feature in Entitas
+/// all systems should belongs to one of the natures below
+/// define nature by need to classify differnt type of system
 /// </summary>
 public class FeatureType : Attribute {
 
